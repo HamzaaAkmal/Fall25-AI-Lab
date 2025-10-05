@@ -28,9 +28,9 @@ def average():
 
     all_movies=0
     for i in data:
-        if i[1]>avg:
-            all_movies+= 1
-            diff=i[1]-avg
+        if i[1] > avg:
+            all_movies += 1
+            diff = i[1] - avg
             print(i[0])
             print(f"The budget is Higher then average is xd {diff}")
     if all_movies > 0:

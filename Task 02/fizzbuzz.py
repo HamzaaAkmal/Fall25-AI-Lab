@@ -12,7 +12,7 @@ def get_answer(num):
         return "Number"
     
 
-#Function to start the Program.
+#Function to start the Program xd.
 def play_now():
     computer = 0
     score = 0
@@ -39,8 +39,10 @@ def play_now():
                 previous_number = 0
                 break
 
-    print("Your final score is:", score)
+    print("final score is:", score)
 
 
 play_now()
+
+#copyright @ Hamza Akmal all rights reserved.
 
