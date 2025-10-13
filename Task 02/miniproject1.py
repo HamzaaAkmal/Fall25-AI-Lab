@@ -8,25 +8,23 @@ movies = [
 ("Incredibles 2", 200000000)
 ]
 
-my_movies=[]
+movies = []
 
 
 def add_movie():
-    name=input("Enter movie name: ")
-    try:
-        budget = int(input("Enter movie budget: "))
-        my_movies.append((name,budget))
+    name=input("Enter movie  name: ")
+    budget = int(input("Enter movie budget to set: "))
+    movies.append((name,budget))
 
-    except ValueError:
-        print("Invalid input! Please enter a number.")
+    
 
 
 def average():
-    data= my_movies if my_movies else movies
+    data = movies if movies else movies
     avg=sum(i[1] for i in data)/len(data)
     print("The average cost of movies is: ",avg)
 
-    all_movies=0
+    all_movies = 0
     for i in data:
         if i[1] > avg:
             all_movies += 1
@@ -48,11 +46,11 @@ print("2: Display all Movies names info")
 
 while True: #Using While loop to control the program flow
     option=int(input("Chose a option:"))
-    if option==1:
+    if option == 1:
         add_movie()
-    elif option==2:
+    elif option == 2:
         average()
-    elif option==3:
+    elif option == 3:
         break
     else:
         print("Oopssss! Try again.")

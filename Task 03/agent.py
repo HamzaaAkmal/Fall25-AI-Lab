@@ -1,46 +1,47 @@
-class Modelbasedagent:
+class SmartTempController:
 
-    def __init__(self, desired_temp=25):   # by default i sets to 25
-        self.desired_temp = desired_temp
-        self.last_action = "OFF"
-        self.fan_status = "OFF"
-        self.history = []
+    def __init__(self, target_temp=25):   # default target temperature
+        self.target_temp = target_temp
+        self.heater_mode = "OFF"
+        self.cooler_mode = "OFF"
+        self.log = []
 
-    def act(self, current_temp):
-        if current_temp < 15:
-            action = "System Shutdown Too Cold "
-            self.last_action = "OFF"
-            self.fan_status = "OFF"
-        elif current_temp < self.desired_temp - 1 and self.last_action != "ON":
-            self.last_action = "ON"
-            action = "Heater ON"
-        elif current_temp > self.desired_temp + 1 and self.last_action != "OFF":
-            self.last_action = "OFF"
-            action = "Heater OFF"
+    def control(self, room_temp):
+        if room_temp < 15:
+            action = "System Halted - Too Cold!"
+            self.heater_mode = "OFF"
+            self.cooler_mode = "OFF"
+        elif room_temp < self.target_temp - 1 and self.heater_mode != "ON":
+            action = "Heater Activated"
+            self.heater_mode = "ON"
+        elif room_temp > self.target_temp + 1 and self.heater_mode != "OFF":
+            action = "Heater Deactivated"
+            self.heater_mode = "OFF"
         else:
-            action = f"No Change, Heater is {self.last_action}"
+            action = f"Stable Condition - Heater: {self.heater_mode}"
 
-        if current_temp > 30:
-            self.fan_status = "ON"
-            action += " + Fan ON"
+        # Fan logic
+        if room_temp > 30:
+            self.cooler_mode = "ON"
+            action += " | Fan Running"
         else:
-            self.fan_status = "OFF"
+            self.cooler_mode = "OFF"
 
-        self.history.append((current_temp, action))
+        self.log.append((room_temp, action))
         return action
 
-    def show_history(self):
-        print("Action History")
-        for temp, action in self.history:
-            print(f"Temp {temp} => {action}")
+    def display_log(self):
+        print("\nAction Record:")
+        for temp, action in self.log:
+            print(f"At {temp}°C → {action}")
 
 
+# Simulating temperature readings
+controller = SmartTempController()
+temperature_readings = [12, 22, 24, 25, 28, 32, 27, 15, 31]
 
-agent = Modelbasedagent()
-temperatures = [12, 22, 24, 25, 28, 32, 27, 15, 31]
+print("Smart Temperature Management System\n")
+for t in temperature_readings:
+    print(f"Room Temp: {t}°C → {controller.control(t)}")
 
-print("Advanced ModelBased Reflex Agent")
-for temp in temperatures:
-    print(f"Current Temp: {temp} : {agent.act(temp)}")
-
-agent.show_history()
+controller.display_log()

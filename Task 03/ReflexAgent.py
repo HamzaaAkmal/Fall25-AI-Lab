@@ -1,48 +1,53 @@
-class Modelbasedagent:
-    def _init_(self, desired_temp=25):
-        self.desired_temp = desired_temp
-        self.last_action = "OFF"   
-        self.fan_status = "OFF"   
-        self.history = []          
+class SmartClimateAgent:
 
-    def act(self, current_temp):
+    def __init__(self, set_temp=25):   # default temperature target
+        self.set_temp = set_temp
+        self.heater_state = "OFF"
+        self.fan_state = "OFF"
+        self.records = []
+
+    def operate(self, current_temp):
 
         if current_temp < 15:
-            action = "System Shutdown Too Cold "
-            self.last_action = "OFF"
-            self.fan_status = "OFF"
+            status = "System Jam Giyya hai - Extremely Cold"
+            self.heater_state = "OFF"
+            self.fan_state = "OFF"
 
-        elif current_temp < self.desired_temp - 1 and self.last_action != "ON":
-            self.last_action = "ON"
-            action = "Heater ON"
+        elif current_temp < self.set_temp - 1 and self.heater_state != "ON":
+            self.heater_state = "ON"
+            status = "Heater Turned ON"
 
-        elif current_temp > self.desired_temp + 1 and self.last_action != "OFF":
-            self.last_action = "OFF"
-            action = "Heater OFF"
+        elif current_temp > self.set_temp + 1 and self.heater_state != "OFF":
+            self.heater_state = "OFF"
+            status = "Heater Turned OFF"
 
         else:
-            action = f"No Change, Heater is {self.last_action}"
+            status = f"No Adjustment Needed (Heater: {self.heater_state})"
 
+        # Fan operation
+
+        
         if current_temp > 30:
-            self.fan_status = "ON"
-            action += " + Fan ON"
+            self.fan_state = "ON"
+            status += " | Cooling Fan Activated"
         else:
-            self.fan_status = "OFF"
+            self.fan_state = "OFF"
 
-        self.history.append((current_temp, action))
-        return action
+        self.records.append((current_temp, status))
+        return status
 
-    def show_history(self):
-        print(" Action History")
-        for temp, action in self.history:
-            print(f"Temp {temp} => {action}")
+    def show_log(self):
+        print("\nSystem Operation Log:")
+        for temp, status in self.records:
+            print(f"Temperature {temp}°C → {status}")
 
 
-agent = Modelbasedagent()
-temperatures = [12, 22, 24, 25, 28, 32, 27, 15, 31]
+# Agent simulation
+climate_agent = SmartClimateAgent()
+temp_values = [12, 22, 24, 25, 28, 32, 27, 15, 31]
 
-print(" Reflex Based  Agent ")
-for temp in temperatures:
-    print(f"Current Temp: {temp} : {agent.act(temp)}")
+print("Adaptive Reflex Temperature Control Agent\n")
+for temp in temp_values:
+    print(f"Current Temperature: {temp}°C → {climate_agent.operate(temp)}")
 
-agent.show_history()
+climate_agent.show_log()
