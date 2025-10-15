@@ -1,56 +1,62 @@
-movies = [
-("Eternal Sunshine of the Spotless Mind", 20000000),
-("Memento", 9000000),
-("Requiem for a Dream", 4500000),
-("Pirates of the Caribbean: On Stranger Tides", 379000000),
-("Avengers: Age of Ultron", 365000000),
-("Avengers: Endgame", 356000000),
-("Incredibles 2", 200000000)
+# Sample data to test program functionality
+film_records = [
+    ("Interstellar", 165000000),
+    ("Joker", 55000000),
+    ("Dune", 165000000),
+    ("Avatar: The Way of Water", 350000000),
+    ("The Dark Knight Rises", 230000000),
+    ("Black Panther", 200000000)
 ]
 
-movies = []
+film_records = []
 
 
-def add_movie():
-    name=input("Enter movie  name: ")
-    budget = int(input("Enter movie budget to set: "))
-    movies.append((name,budget))
+def insert_film():
+    title = input("Enter the film title: ")
+    cost = int(input("Enter the production cost: "))
+    film_records.append((title, cost))
+    print(f"{title} added successfully!\n")
+
+
+def analyze_budget():
+    if not film_records:
+        print("No films available. Please add some first!")
+        return
+
+    total_cost = sum(price for _, price in film_records)
+    avg_cost = total_cost / len(film_records)
+    print(f"Average film production cost: {avg_cost}")
+
+    above_average = []
+    for film, cost in film_records:
+        if cost > avg_cost:
+            gap = cost - avg_cost
+            above_average.append((film, gap))
+            print(f"{film} exceeds the average by {gap}")
+
+    if above_average:
+        print(f"Total films with higher-than-average cost: {len(above_average)}")
+    else:
+        print("No film has a cost above the average.\n")
+
+
+print("Welcome to the Film Budget Analyzer!")
+print("1 → Add a New Film")
+print("2 → Check Film Budget Summary")
+print("3 → Exit Program\n")
+
+while True:
+    
+        user_choice = int(input("Select an option: "))
+        if user_choice == 1:
+            insert_film()
+        elif user_choice == 2:
+            analyze_budget()
+        elif user_choice == 3:
+            print("Exiting program xd.... Have a great day!")
+            break
+        else:
+            print("Invalid choice. Please pick 1, 2, or 3.")
+   
 
     
-
-
-def average():
-    data = movies if movies else movies
-    avg=sum(i[1] for i in data)/len(data)
-    print("The average cost of movies is: ",avg)
-
-    all_movies = 0
-    for i in data:
-        if i[1] > avg:
-            all_movies += 1
-            diff = i[1] - avg
-            print(i[0])
-            print(f"The budget is Higher then average is xd {diff}")
-    if all_movies > 0:
-
-        print("This  movies has higher budget then average cost.")
-
-        print(f"The count of movies have high budget then average is {all_movies}")
-    else:
-        print("No movie has higher budget than average")
-   
-print("Note: There are some dummy data to check programe.You can add your data.")
-print("1: Add Movie ")
-print("2: Display all Movies names info")
-
-
-while True: #Using While loop to control the program flow
-    option=int(input("Chose a option:"))
-    if option == 1:
-        add_movie()
-    elif option == 2:
-        average()
-    elif option == 3:
-        break
-    else:
-        print("Oopssss! Try again.")
