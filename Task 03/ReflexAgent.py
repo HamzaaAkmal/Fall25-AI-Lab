@@ -42,12 +42,12 @@ class SmartClimateAgent:
             print(f"Temperature {temp}°C → {status}")
 
 
-# Agent simulation
+
 climate_agent = SmartClimateAgent()
 temp_values = [12, 22, 24, 25, 28, 32, 27, 15, 31]
 
-print("Adaptive Reflex Temperature Control Agent\n")
+
 for temp in temp_values:
-    print(f"Current Temperature: {temp}°C → {climate_agent.operate(temp)}")
+    print(f"Current Temperature: {temp} => {climate_agent.operate(temp)}")
 
 climate_agent.show_log()

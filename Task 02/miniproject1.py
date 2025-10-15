@@ -15,7 +15,7 @@ def insert_film():
     title = input("Enter the film title: ")
     cost = int(input("Enter the production cost: "))
     film_records.append((title, cost))
-    print(f"{title} added successfully!\n")
+    print(f"{title} added successfully!")
 
 
 def analyze_budget():
@@ -37,7 +37,7 @@ def analyze_budget():
     if above_average:
         print(f"Total films with higher-than-average cost: {len(above_average)}")
     else:
-        print("No film has a cost above the average.\n")
+        print("No film has a cost above the average.")
 
 
 print("Welcome to the Film Budget Analyzer!")
@@ -56,7 +56,7 @@ while True:
             print("Exiting program xd.... Have a great day!")
             break
         else:
-            print("Invalid choice. Please pick 1, 2, or 3.")
+            print("Invalid choiceee broo. Please pick 1, 2, or 3...")
    
 
     

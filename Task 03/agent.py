@@ -31,17 +31,17 @@ class SmartTempController:
         return action
 
     def display_log(self):
-        print("\nAction Record:")
+        print("Action Record:")
         for temp, action in self.log:
-            print(f"At {temp}°C → {action}")
+            print(f"At {temp} => {action}")
 
 
 # Simulating temperature readings
 controller = SmartTempController()
 temperature_readings = [12, 22, 24, 25, 28, 32, 27, 15, 31]
 
-print("Smart Temperature Management System\n")
+print("Down Temperature Management System")
 for t in temperature_readings:
-    print(f"Room Temp: {t}°C → {controller.control(t)}")
+    print(f"Room Temp: {t} => {controller.control(t)}")
 
 controller.display_log()
