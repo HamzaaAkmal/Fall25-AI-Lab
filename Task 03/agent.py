@@ -1,10 +1,10 @@
 class SmartTempController:
 
-    def __init__(self, target_temp=25):   # default target temperature
-        self.target_temp = target_temp
-        self.heater_mode = "OFF"
-        self.cooler_mode = "OFF"
-        self.log = []
+    def __init__(self, target_temp):   
+        self.target_temp = target_temp # Desired temperature
+        self.heater_mode = "OFF" # Initial heater state
+        self.cooler_mode = "OFF" # Initial cooler state
+        self.log = [] # Log of actions
 
     def control(self, room_temp):
         if room_temp < 15:
