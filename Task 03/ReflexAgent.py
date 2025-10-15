@@ -1,10 +1,10 @@
 class SmartClimateAgent:
 
-    def __init__(self, set_temp=25):   # default temperature target
-        self.set_temp = set_temp
-        self.heater_state = "OFF"
-        self.fan_state = "OFF"
-        self.records = []
+    def __init__(self, set_temp):   
+        self.set_temp = set_temp # Desired temperature
+        self.heater_state = "OFF" # Initial heater state
+        self.fan_state = "OFF" # Initial fan state
+        self.records = [] # Log of actions
 
     def operate(self, current_temp):
 
@@ -29,7 +29,7 @@ class SmartClimateAgent:
         
         if current_temp > 30:
             self.fan_state = "ON"
-            status += " | Cooling Fan Activated"
+            status += "  Cooling Fan Activated"
         else:
             self.fan_state = "OFF"
 
@@ -37,9 +37,9 @@ class SmartClimateAgent:
         return status
 
     def show_log(self):
-        print("\nSystem Operation Log:")
+        print("System Operation Log:")
         for temp, status in self.records:
-            print(f"Temperature {temp}°C → {status}")
+            print(f"Temperature {temp} => {status}")
 
 
 

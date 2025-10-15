@@ -7,6 +7,6 @@ def remove_punctuations(text):
     return result
 
 # Example usage
-sentence = "Hello!!! How are you? I'm fine..."
+sentence = "Hello!! How are you I'm fine..."
 print("Original:", sentence)
 print("Without Punctuations:", remove_punctuations(sentence))

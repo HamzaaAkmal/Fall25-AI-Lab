@@ -1,4 +1,5 @@
 # Sample data to test program functionality
+
 film_records = [
     ("Interstellar", 165000000),
     ("Joker", 55000000),
@@ -41,9 +42,9 @@ def analyze_budget():
 
 
 print("Welcome to the Film Budget Analyzer!")
-print("1 → Add a New Film")
-print("2 → Check Film Budget Summary")
-print("3 → Exit Program\n")
+print("1 => Add a New Film")
+print("2 => Check Film Budget Summary")
+print("3 => Exit Program")
 
 while True:
     

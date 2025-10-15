@@ -23,7 +23,7 @@ class SmartTempController:
         # Fan logic
         if room_temp > 30:
             self.cooler_mode = "ON"
-            action += " | Fan Running"
+            action += "  Fan Running"
         else:
             self.cooler_mode = "OFF"
 
@@ -36,7 +36,7 @@ class SmartTempController:
             print(f"At {temp} => {action}")
 
 
-# Simulating temperature readings
+# running the controller
 controller = SmartTempController()
 temperature_readings = [12, 22, 24, 25, 28, 32, 27, 15, 31]
 
