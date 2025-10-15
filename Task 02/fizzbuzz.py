@@ -1,48 +1,50 @@
 import random
 
-#Heart Function of the program.
-def get_answer(num): 
-    if num % 3 == 0 and num % 5 == 0:
-        return "Fizz Buzz"
-    elif num % 3 == 0:
+# Core logic that checks divisibility
+def check_pattern(value):
+    if value % 3 == 0 and value % 5 == 0:
+        return "FizzBuzz"
+    elif value % 3 == 0:
         return "Fizz"
-    elif num % 5 == 0:
+    elif value % 5 == 0:
         return "Buzz"
     else:
         return "Number"
-    
 
-#Function to start the Program xd.
-def play_now():
-    computer = 0
-    score = 0
-    previous_number = 0
+
+# Main gameplay function
+def start_game():
+    total_score = 0
+    last_num = 0
+    result_sum = 0
 
     while True:
-        number =random.randint(1, 100)
-        computer =previous_number + number
-        print("Number on screen:", number)
-        guess = input("Your guess (1:Buzz 2:FizzBuzz 3:Number): ").strip()
-        correct = get_answer(computer)
-        if guess.lower() == correct.lower():
-            print("Correct!")
-            score += 1
-            previous_number = number
+        current_num = random.randint(1, 100)
+        result_sum = last_num + current_num
+        print("Generated number:", current_num)
+
+        user_guess = input("Enter your guess (1:Buzz  2:FizzBuzz  3:Number): ").strip()
+        actual = check_pattern(result_sum)
+
+        if user_guess.lower() == actual.lower():
+            print("Correct answer!")
+            total_score += 1
+            last_num = current_num
         else:
-            print("Wrong! Answer Oops:", correct)
-            print("Hidden number is:", computer)
-            cont = input(" you want to continue? (Yes/No): ").strip().lower()
-            if cont != "yes":
-                print("Your final score is xd:", score)
-                score = 0
-                computer = 0
-                previous_number = 0
+            print("Incorrect! The right answer was:", actual)
+            print("The hidden calculated number was:", result_sum)
+            retry = input("Do you want to continue playing? (yes/no): ").strip().lower()
+            if retry != "yes":
+                print("Final Score:", total_score)
+                total_score = 0
+                last_num = 0
+                result_sum = 0
                 break
 
-    print("final score is:", score)
+    print("Game Over. Your total score:", total_score)
 
 
-play_now()
+# Start the program
+start_game()
 
-#copyright @ Hamza Akmal all rights reserved.
-
+# Developed by Hamza Akmal — All Rights Reserved.
