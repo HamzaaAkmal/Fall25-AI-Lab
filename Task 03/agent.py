@@ -1,47 +1,45 @@
-class SmartTempController:
+class ModelBasedReflexAgent:
+    Action_on = "Turn ON Heater"
+    Action_off = "Turn OFF Heater"
 
-    def __init__(self, target_temp):   
-        self.target_temp = target_temp # Desired temperature
-        self.heater_mode = "OFF" # Initial heater state
-        self.cooler_mode = "OFF" # Initial cooler state
-        self.log = [] # Log of actions
+    def __init__(self, temp):
+        self.fixed_temp = temp
+        self.last_action = None
+        self.history = {}
 
-    def control(self, room_temp):
-        if room_temp < 15:
-            action = "System Halted - Too Cold!"
-            self.heater_mode = "OFF"
-            self.cooler_mode = "OFF"
-        elif room_temp < self.target_temp - 1 and self.heater_mode != "ON":
-            action = "Heater Activated"
-            self.heater_mode = "ON"
-        elif room_temp > self.target_temp + 1 and self.heater_mode != "OFF":
-            action = "Heater Deactivated"
-            self.heater_mode = "OFF"
+    def sensor(self, temp):
+        self.current_temp = temp
+
+    def performance(self):
+        if self.current_temp in self.history:
+            return f"From history: {self.history[self.current_temp]}"
+        if self.current_temp < self.fixed_temp:
+            action = self.Action_on
         else:
-            action = f"Stable Condition - Heater: {self.heater_mode}"
+            action = self.Action_off
 
-        # Fan logic
-        if room_temp > 30:
-            self.cooler_mode = "ON"
-            action += "  Fan Running"
-        else:
-            self.cooler_mode = "OFF"
-
-        self.log.append((room_temp, action))
+        self.history[self.current_temp] = action
         return action
 
-    def display_log(self):
-        print("Action Record:")
-        for temp, action in self.log:
-            print(f"At {temp} => {action}")
+    def actuator(self, room_name):
+        action = self.performance()
+        print(room_name, "temperature is", self.current_temp, "°C =>", action)
 
 
-# running the controller
-controller = SmartTempController()
-temperature_readings = [12, 22, 24, 25, 28, 32, 27, 15, 31]
+rooms = {
+    "Living_Room": 20,
+    "Drawing_Room": 29,
+    "kitchen": 20,
+    "Bed_Rooms": 18,
+    "study_Room": 25,
+    "Dinning_Room": 18,
+    "Guest_Room": 35,
+    "Garage": 30,
+}
 
-print("Down Temperature Management System")
-for t in temperature_readings:
-    print(f"Room Temp: {t} => {controller.control(t)}")
+print("Model-Based Reflex Agent Detection")
+agent = ModelBasedReflexAgent(22)
 
-controller.display_log()
+for room, temp in rooms.items():
+    agent.sensor(temp)
+    agent.actuator(room)

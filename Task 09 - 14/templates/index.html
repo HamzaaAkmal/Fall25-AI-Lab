@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🪙 Cryptocurrency Price Prediction</h1>
+            <p class="subtitle">Predict Bitcoin (BTC) closing prices using machine learning</p>
+        </header>
+
+        <div class="model-info" id="modelInfo">
+            <div class="info-card">
+                <h3>Model Information</h3>
+                <p><strong>Model:</strong> <span id="modelName">Loading...</span></p>
+                <p><strong>R² Score:</strong> <span id="modelScore">Loading...</span></p>
+                <p><strong>Target:</strong> <span id="modelTarget">Loading...</span></p>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('simple')">Simple Input</button>
+            <button class="tab-button" onclick="switchTab('advanced')">Advanced Input</button>
+        </div>
+
+        <!-- Simple Input Tab -->
+        <div id="simpleTab" class="tab-content active">
+            <div class="form-container">
+                <h2>Quick Prediction</h2>
+                <p class="hint">Enter key cryptocurrency metrics to get a prediction</p>
+                
+                <form id="simplePredictionForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="eth_close">Ethereum Close Price (ETH)</label>
+                            <input type="number" id="eth_close" name="Close (ETH)" step="0.01" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="btc_volume">Bitcoin Volume (BTC)</label>
+                            <input type="number" id="btc_volume" name="Volume (BTC)" step="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eth_volume">Ethereum Volume (ETH)</label>
+                            <input type="number" id="eth_volume" name="Volume (ETH)" step="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="usdt_close">USDT Close Price</label>
+                            <input type="number" id="usdt_close" name="Close (USDT)" step="0.0001" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bnb_close">BNB Close Price</label>
+                            <input type="number" id="bnb_close" name="Close (BNB)" step="0.01" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="month">Month (1-12)</label>
+                            <input type="number" id="month" name="Month" min="1" max="12" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-predict">
+                        <span>🔮 Predict BTC Price</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Advanced Input Tab -->
+        <div id="advancedTab" class="tab-content">
+            <div class="form-container">
+                <h2>Advanced Prediction</h2>
+                <p class="hint">Enter all features for more accurate predictions</p>
+                
+                <form id="advancedPredictionForm">
+                    <div id="advancedFormFields" class="form-grid">
+                        <!-- Fields will be dynamically generated -->
+                    </div>
+
+                    <button type="submit" class="btn-predict">
+                        <span>🔮 Predict BTC Price</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="results hidden">
+            <h2>Prediction Result</h2>
+            <div class="result-card">
+                <div class="result-value">
+                    <span class="label">Predicted BTC Close Price:</span>
+                    <span class="value" id="predictionValue">$0.00</span>
+                </div>
+                <div class="result-details">
+                    <p><strong>Model Used:</strong> <span id="resultModel">-</span></p>
+                    <p><strong>Prediction Time:</strong> <span id="predictionTime">-</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error" class="error hidden">
+            <h3>⚠️ Error</h3>
+            <p id="errorMessage"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Created with ❤️ using Machine Learning | Model trained on historical crypto data</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

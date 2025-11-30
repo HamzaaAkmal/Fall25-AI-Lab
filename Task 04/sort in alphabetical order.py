@@ -1,16 +1,13 @@
-sentence = "Hey! I'm Hamza Akmal Founder/CEO of downlabs."
+text = "I am Rasikh"
+arr = list(text) 
+print(arr)
+length = len(arr)
+for i in range(length):
+    for j in range(i+1, length):
+        if ord(arr[j]) < ord(arr[i]):   
+            char = arr[i]
+            arr[i] = arr[j]
+            arr[j] = char
 
-words = sentence.split()
-
-for i in range(len(words)):
-    min_index = i
-    for j in range(i+1, len(words)):
-        if ord(words[j][0]) < ord(words[min_index][0]):
-            min_index = j
-    if min_index != i:
-        words[i], words[min_index] = words[min_index], words[i]
-
-sorted_sentence = " ".join(words)
-
-print("Original:", sentence)
-print("Sorted:", sorted_sentence)
+print("Original:", text)
+print("Sorted by alphabet:", ''.join(arr))

@@ -19,3 +19,16 @@ if luhn_check(card_number):
     print(f"{card_number} is VALID")
 else:
     print(f"{card_number} is INVALID")
+
+def luhan_algo(num):
+    digit = [int(d) for d in str(num)]
+    total = 0
+    reverse_digi = digit[::-1]
+
+    for i , d in enumerate(reverse_digi):
+        if i %2 == 1:
+            d = d*2
+            if d >9:
+                d-=9
+        total +=9
+    return total % 10 == 0
